@@ -1,0 +1,27 @@
+# Node & Python common
+node_modules/
+__pycache__/
+*.pyc
+
+# logs & temp
+*.log
+.env
+.env.*  
+.DS_Store
+*.sqlite3
+*.db
+instance/
+
+# build artifacts
+dist/
+build/
+
+# Docker artifacts
+*.pid
+*.sock
+docker-compose.override.yml
+*.tgz
+
+# System
+.vscode/
+.idea/

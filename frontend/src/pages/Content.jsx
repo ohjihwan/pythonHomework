@@ -14,7 +14,7 @@ function Content() {
 			return;
 		}
 
-		fetch('http://localhost:5000/api/protected', {
+		fetch('/api/protected', {
 			method: 'GET',
 			headers: { Authorization: `Bearer ${token}` }
 		})

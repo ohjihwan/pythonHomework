@@ -27,7 +27,8 @@ function Signup() {
 			console.log('📦 서버 응답 내용:', txt);
 
 			if (!res.ok) {
-				alert("회원가입 요청 실패 (HTTP " + res.status + ")");
+				// alert("회원가입 요청 실패 (HTTP " + res.status + ")");
+				alert("중복된 아이디 입니다");
 				return;
 			}
 

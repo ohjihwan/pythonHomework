@@ -7,9 +7,11 @@ function Login() {
 	const [userid, setUserid] = useState('');
 	const [password, setPassword] = useState('');
 	const [hoverIndex, setHoverIndex] = useState(0);
+	const [hoverCount, setHoverCount] = useState(0);
+	const isPasswordValid = password.length >= 6;
+	const moveLocked = userid && isPasswordValid;
 	const navigate = useNavigate();
-
-	const moveLocked = userid && password;
+	
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
@@ -56,7 +58,20 @@ function Login() {
 
 	const handleHover = () => {
 		if (moveLocked) return;
-		setHoverIndex(prev => (prev % 5) + 1);
+
+		setHoverIndex((prev) => {
+			const next = (prev % 5) + 1;
+
+			setHoverCount((count) => {
+				const updated = count + 1;
+				if (updated == 10) {
+					alert("🎉 힌트: 비밀번호 6자리 이상 입력하면 버튼이 도망가지 않아요! 😜😜");
+				}
+				return updated;
+			});
+
+			return next;
+		});
 	};
 
 	return (
@@ -81,7 +96,7 @@ function Login() {
 				ref={loginBtnRef}
 				tabIndex={moveLocked ? 0 : -1}
 				onFocus={handleLoginBtnFocus}
-				className={`login__button login__button--login${!moveLocked && hoverIndex > 0 ? ` move${hoverIndex}` : ''}`} 
+				className={`login__button login__button--login${!moveLocked && hoverIndex > 0 ? ` move${hoverIndex}` : ''}`}
 				onMouseEnter={handleHover}>
 				로그인
 			</button>

@@ -2,7 +2,7 @@ import sys
 import os
 os.environ['PYTHONUNBUFFERED'] = '1'
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User
@@ -92,8 +92,12 @@ def protected():
 		return jsonify({'status': 'error', 'message': '유효하지 않은 토큰입니다.'}), 401
 	
 @app.route('/')
-def index():
-    return 'Hello from Flask in Docker!'
+def serve_index():
+    return send_from_directory('frontend/dist', 'index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory('frontend/dist', path)
 
 if __name__ == '__main__':
     with app.app_context():

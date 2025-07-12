@@ -1,4 +1,3 @@
-import sys
 import os
 os.environ['PYTHONUNBUFFERED'] = '1'
 
@@ -10,7 +9,7 @@ import bcrypt
 import jwt
 import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="frontend/dist", static_url_path="/")
 CORS(app)
 
 # ✅ 절대경로 기반 SQLite 설정
@@ -92,12 +91,8 @@ def protected():
 		return jsonify({'status': 'error', 'message': '유효하지 않은 토큰입니다.'}), 401
 	
 @app.route('/')
-def serve_index():
-    return send_from_directory('frontend/dist', 'index.html')
-
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory('frontend/dist', path)
+def index():
+    return app.send_static_file('index.html')
 
 if __name__ == '__main__':
     with app.app_context():

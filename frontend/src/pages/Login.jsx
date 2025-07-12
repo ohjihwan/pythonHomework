@@ -65,7 +65,7 @@ function Login() {
 			setHoverCount((count) => {
 				const updated = count + 1;
 				if (updated == 10) {
-					alert("🎉 힌트: 비밀번호 6자리 이상 입력하면 버튼이 도망가지 않아요! 😜😜");
+					alert("🎉 힌트: 비밀번호 6자리 이상 입력하면 버튼이 도망가지 않아요! 😜");
 				}
 				return updated;
 			});
